@@ -1,21 +1,20 @@
-pipeline{
+pipeline {
     agent any
-    stages{
-        stage('checkout'){
-            steps{
-                checkout scm
+    
+    stages {
+        stage('SCM Checkout') {
+            steps {
+                retry(3) {
+                    git branch: 'main', url: 'https://github.com/ShanukaLakshan/Api'
+                }
             }
         }
-        stage('Test'){
-            steps{
-                sh 'sudo apt install npm'
-                sh 'npm test'
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t adomicarts/nodeapp-cuban:${BUILD_NUMBER} .'
             }
         }
-        stage('Build'){
-            steps{
-                sh 'npm run build'
-            }
-        }
+       
     }
+    
 }
