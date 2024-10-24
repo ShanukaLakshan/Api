@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'birfbkdstsbhbk/learnawareai-service' 
-        DOCKER_CREDENTIALS_ID = 'docker-credentials-api' 
+        DOCKER_CREDENTIALS_ID = 'docker-credentials' 
     }
     
     stages {
@@ -46,7 +46,7 @@ pipeline {
         }
         stage('Login to Docker Hub') {
             steps {
-                withCredentials([string(credentialsId: 'docker-credentials-api', variable: 'dockercredentials')]) {
+                withCredentials([string(credentialsId: 'docker-credentials', variable: 'dockercredentials')]) {
                     script {  
                         sh "docker login -u birfbkdstsbhbk -p '${dockercredentials}'"
                     }
