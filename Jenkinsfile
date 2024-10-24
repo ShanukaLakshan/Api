@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'learnawareai-service' 
+        DOCKER_IMAGE = 'birfbkdstsbhbk/learnawareai-service' 
         DOCKER_CREDENTIALS_ID = 'docker-credentials' 
     }
     
