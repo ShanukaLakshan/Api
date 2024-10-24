@@ -48,7 +48,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: "${DOCKER_CREDENTIALS_ID}", variable: "${DOCKER_PASSWORD}")]) {
                     script {  
-                        sh "docker login -u shanukalakshan -p ${DOCKER_PASSWORD}"
+                        sh "docker login -u birfbkdstsbhbk -p ${DOCKER_PASSWORD}"
                     }
                 }
             }
