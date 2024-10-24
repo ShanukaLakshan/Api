@@ -16,7 +16,7 @@ describe("API Tests", () => {
     expect(response.status).to.equal(200);
     expect(response.body).to.deep.equal([
       { id: 1, name: "John Doe" },
-      { id: 2, name: "Jane Doe" },
+      { id: 2, name: "Shanuka Lakshan" },
     ]);
   });
 
