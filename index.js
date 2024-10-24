@@ -3,14 +3,13 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Welcome to the Learnaware API with Jenkins!");
+  res.send("Welcome to the Learnaware API!");
 });
 
 app.get("/api/users", (req, res) => {
   const users = [
     { id: 1, name: "John Doe" },
-
-    { id: 2, name: "Jane Doe" },
+    { id: 2, name: "Shanuka Lakshan" },
   ];
   res.json(users);
 });

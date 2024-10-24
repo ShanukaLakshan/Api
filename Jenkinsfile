@@ -10,7 +10,7 @@ pipeline {
         stage('SCM Checkout') {
             steps {
                 retry(3) {
-                    git branch: 'main', url: 'https://github.com/ShanukaLakshan/Api'
+                    git branch: 'develop', url: 'https://github.com/ShanukaLakshan/Api'
                 }
             }
         }
@@ -47,24 +47,22 @@ pipeline {
         stage('Login to Docker Hub') {
             steps {
                 withCredentials([string(credentialsId: 'docker-credentials', variable: 'dockercredentials')]) {
-                    script {  
-                        sh "docker login -u birfbkdstsbhbk -p '${dockercredentials}'"
+                    script {
+                        sh """
+                        echo '${dockercredentials}' | docker login -u birfbkdstsbhbk --password-stdin
+                        """
                     }
                 }
             }
         }
         stage('Push Image') {
+            when {
+                branch 'main' // Only push when on the 'main' branch
+            }
             steps {
                 sh "docker push $DOCKER_IMAGE"
             }
         }
-        // stage('Deploy to Production') {
-        //     steps {
-        //         script {
-        //             sh 'ssh user@your-server "docker pull $DOCKER_IMAGE && docker run -d -p 3000:3000 $DOCKER_IMAGE"'
-        //         }
-        //     }
-        // }
     }
     post {
         always {

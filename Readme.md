@@ -9,12 +9,10 @@ sudo systemctl restart nginx
 sudo ln -s /etc/nginx/sites-available/myapp /etc/nginx/sites-enabled/
 sudo nano /etc/nginx/sites-available/myapp
 
-
 sudo ln -s /etc/nginx/sites-available/myapp /etc/nginx/sites-enabled/
 sudo ln -s /etc/nginx/sites-available/jenkins /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl restart nginx
-
 
 server {
 listen 80;
@@ -45,3 +43,9 @@ server_name 216.244.86.210; # or your domain name
     }
 
 }
+
+<!-- DELETE UNTAGGED IMAGES -->
+
+docker rmi $(docker images -f "dangling=true" -q)
+
+docker images -f "dangling=true"
