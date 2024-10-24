@@ -33,14 +33,14 @@ pipeline {
         stage('Test Case') {
             steps {
                 script {
-                    sh 'npm test'
+                    sh "npm test"
                 }
             }
         }
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'docker build -t $DOCKER_IMAGE .'
+                    sh "docker build -t $DOCKER_IMAGE ."
                 }
             }
         }
