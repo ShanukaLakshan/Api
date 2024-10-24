@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:18'
+            args '-v /var/run/docker.sock:/var/run/docker.sock' 
+        }
+    }
 
     stages {
         stage('Checkout') {
@@ -10,23 +15,19 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh '''
-                curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
-                apt-get install -y nodejs
-                '''
+                sh 'npm install'  
             }
         }
 
         stage('Test') {
             steps {
-                sh 'npm install'  
-                sh 'npm test'
+                sh 'npm test'  
             }
         }
 
         stage('Build') {
             steps {
-                sh 'npm run build'
+                sh 'npm run build' 
             }
         }
     }
