@@ -1,34 +1,37 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:18'
-            args '-v /var/run/docker.sock:/var/run/docker.sock' 
-        }
-    }
-
+    agent any
+    
     stages {
-        stage('Checkout') {
+        stage('SCM Checkout') {
             steps {
-                checkout scm
+                retry(3) {
+                    git branch: 'main', url: 'https://github.com/ShanukaLakshan/Api.git'
+                }
             }
         }
-
-        stage('Install Dependencies') {
+        stage('Build Docker Image') {
             steps {
-                sh 'npm install'  
+                sh 'docker build -t adomicarts/nodeapp-cuban:${BUILD_NUMBER} .'
             }
         }
-
-        stage('Test') {
-            steps {
-                sh 'npm test'  
-            }
-        }
-
-        stage('Build') {
-            steps {
-                sh 'npm run build' 
-            }
-        }
+        // stage('Login to Docker Hub') {
+        //     steps {
+        //         withCredentials([string(credentialsId: 'samin-docker', variable: 'samindocker')]) {
+        //             script {  
+        //                 sh "docker login -u adomicarts -p '${samindocker}'"
+        //             }
+        //         }
+        //     }
+        // }
+        // stage('Push Image') {
+        //     steps {
+        //         sh "docker push adomicarts/nodeapp-cuban:${BUILD_NUMBER}"
+        //     }
+        // }
     }
+    // post {
+    //     always {
+    //         sh 'docker logout'
+    //     }
+    // }
 }
