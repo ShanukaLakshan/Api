@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     sh 'node -v'
-                    sh 'npm -v'
+                    sh 'yarn -v'
                 }
             }
         }
@@ -28,7 +28,7 @@ pipeline {
                 script {
                     // Remove node_modules if it exists and install all dependencies
                     sh 'rm -rf node_modules' // Clean existing node_modules
-                    sh 'npm install'          // Install all dependencies including devDependencies
+                    sh 'yarn install'          // Install all dependencies including devDependencies
                 }
             }
         }
@@ -37,7 +37,7 @@ pipeline {
                 script {
                     // Add node_modules/.bin to PATH
                     env.PATH = "${env.WORKSPACE}/node_modules/.bin:${env.PATH}"
-                    sh 'npm test'    // Run tests
+                    sh 'yarn test'    // Run tests
                 }
             }
         }
