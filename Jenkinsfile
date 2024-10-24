@@ -53,11 +53,11 @@ pipeline {
                 }
             }
         }
-        // stage('Push Image') {
-        //     steps {
-        //         sh "docker push $DOCKER_IMAGE"
-        //     }
-        // }
+        stage('Push Image') {
+            steps {
+                sh "docker push $DOCKER_IMAGE"
+            }
+        }
         // stage('Deploy to Production') {
         //     steps {
         //         script {
