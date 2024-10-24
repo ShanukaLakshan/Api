@@ -15,6 +15,14 @@ pipeline {
                 }
             }
         }
+        stage('Check Node and NPM Version') {
+            steps {
+                script {
+                    sh 'node -v'
+                    sh 'npm -v'
+                }
+            }
+        }
         stage('Clean Build') {
             steps {
                 script {
@@ -27,7 +35,8 @@ pipeline {
         stage('Test Case') {
             steps {
                 script {
-                    // Run your tests here
+                    // Add node_modules/.bin to PATH
+                    env.PATH = "${env.WORKSPACE}/node_modules/.bin:${env.PATH}"
                     sh 'npm test'    // Run tests
                 }
             }

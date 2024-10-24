@@ -5,7 +5,7 @@ describe("API Tests", () => {
   it("GET / - should return welcome message", async () => {
     const response = await request(app).get("/");
     expect(response.status).toBe(200);
-    expect(response.text).toBe("Welcome to the Learnaware API!");
+    expect(response.text).toBe("Welcome to the Learnaware API with Jenkins!");
   });
 
   it("GET /api/users - should return a list of users", async () => {
