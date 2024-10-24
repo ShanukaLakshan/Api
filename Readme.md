@@ -3,7 +3,8 @@ sudo docker run -d -p 3000:3000 birfbkdstsbhbk/learnawareai-service
 sudo docker run -d -p 8080:5000 jenkins/jenkins
 
 sudo ufw status
-sudo ufw allow 3000 ========= sudo ufw allow 8081
+sudo ufw allow 3000 =========
+sudo ufw allow 8081
 
 sudo systemctl restart nginx
 sudo ln -s /etc/nginx/sites-available/myapp /etc/nginx/sites-enabled/
