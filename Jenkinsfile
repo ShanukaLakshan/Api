@@ -15,12 +15,19 @@ pipeline {
                 }
             }
         }
+        stage('Clean Build') {
+            steps {
+                script {
+                    // Remove node_modules if it exists and install all dependencies
+                    sh 'rm -rf node_modules' // Clean existing node_modules
+                    sh 'npm install'          // Install all dependencies including devDependencies
+                }
+            }
+        }
         stage('Test Case') {
             steps {
                 script {
                     // Run your tests here
-                    // For example, if you're using Mocha:
-                    sh 'npm install' // Install dev dependencies if needed
                     sh 'npm test'    // Run tests
                 }
             }
@@ -48,7 +55,6 @@ pipeline {
             steps {
                 script {
                     // Add your deployment steps here
-                    // This could involve SSH-ing into a server and pulling the new image, etc.
                     sh 'ssh user@your-server "docker pull $DOCKER_IMAGE && docker run -d -p 3000:3000 $DOCKER_IMAGE"'
                 }
             }
