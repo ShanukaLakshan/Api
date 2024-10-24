@@ -1,5 +1,5 @@
 sudo docker build -t learnaware-ai-service .
-sudo docker run -d -p 3000:3000 learnaware-ai-service
+sudo docker run -d -p 3000:3000 birfbkdstsbhbk/learnawareai-service
 sudo docker run -d -p 8080:5000 jenkins/jenkins
 
 sudo ufw status
