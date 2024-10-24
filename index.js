@@ -3,7 +3,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Welcome to the Dockerized Express API!");
+  res.send("Welcome to the Learnaware API!");
 });
 
 app.get("/api/users", (req, res) => {
