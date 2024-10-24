@@ -1,19 +1,31 @@
-pipeline{
+pipeline {
     agent any
-    stages{
-        stage('checkout'){
-            steps{
+
+    stages {
+        stage('Checkout') {
+            steps {
                 checkout scm
             }
         }
-        stage('Test'){
-            steps{
-                sh 'sudo apt install npm'
+
+        stage('Install Dependencies') {
+            steps {
+                sh '''
+                curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+                apt-get install -y nodejs
+                '''
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'npm install'  
                 sh 'npm test'
             }
         }
-        stage('Build'){
-            steps{
+
+        stage('Build') {
+            steps {
                 sh 'npm run build'
             }
         }
