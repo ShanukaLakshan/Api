@@ -26,7 +26,6 @@ pipeline {
         stage('Clean Build') {
             steps {
                 script {
-                    // Remove node_modules if it exists and install all dependencies
                     sh 'rm -rf node_modules' // Clean existing node_modules
                     sh 'npm install'          // Install all dependencies including devDependencies
                 }
