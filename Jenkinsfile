@@ -44,15 +44,15 @@ pipeline {
                 }
             }
         }
-        // stage('Login to Docker Hub') {
-        //     steps {
-        //         withCredentials([string(credentialsId: "${DOCKER_CREDENTIALS_ID}", variable: "${DOCKER_CREDENTIALS_ID}")]) {
-        //             script {  
-        //                 sh "docker login -u birfbkdstsbhbk -p ${DOCKER_CREDENTIALS_ID}"
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Login to Docker Hub') {
+            steps {
+                withCredentials([string(credentialsId: "${DOCKER_CREDENTIALS_ID}", variable: "${DOCKER_CREDENTIALS_ID}")]) {
+                    script {  
+                        sh "docker login -u birfbkdstsbhbk -p ${DOCKER_CREDENTIALS_ID}"
+                    }
+                }
+            }
+        }
         // stage('Push Image') {
         //     steps {
         //         sh "docker push $DOCKER_IMAGE"
