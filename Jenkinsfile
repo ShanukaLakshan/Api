@@ -10,7 +10,7 @@ pipeline {
         stage('SCM Checkout') {
             steps {
                 retry(3) {
-                    git branch: 'develop', url: 'https://github.com/ShanukaLakshan/Api'
+                    git branch: 'main', url: 'https://github.com/ShanukaLakshan/Api'
                 }
             }
         }
@@ -56,9 +56,6 @@ pipeline {
             }
         }
         stage('Push Image') {
-            when {
-                branch 'main' // Only push when on the 'main' branch
-            }
             steps {
                 sh "docker push $DOCKER_IMAGE"
             }
